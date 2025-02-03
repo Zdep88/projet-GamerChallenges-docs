@@ -124,6 +124,7 @@ index
 
 **DELETE**
 
+`/api/propositions/:propositionId`\
 `/api/challenges/:challengeId` \
 `/api/users/:userId`
 

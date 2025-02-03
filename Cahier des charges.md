@@ -125,7 +125,7 @@ En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour m
 |--------------|---------------|----------------------------------------------------|------------------------|
 | id           | Integer (PK)  | Identifiant unique de l'utilisateur.               | SERIAL PRIMARY KEY      |
 | role_id      | Integer (FK)  | Référence vers l'identifiant du rôle.               | Doit exister dans `role` |
-| name         | Text          | Nom de l'utilisateur.                              | NOT NULL              |
+| name         | Text          | Nom de l'utilisateur.                              | NOT NULL UNIQUE             |
 | password     | Text          | Mot de passe de l'utilisateur.                     | NOT NULL            |
 
 ---
@@ -135,7 +135,7 @@ En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour m
 | **Attribut** | **Type**      | **Description**                                      | **Contraintes**        |
 |--------------|---------------|----------------------------------------------------|------------------------|
 | id           | Integer (PK)  | Identifiant unique du jeu.                         | SERIAL PRIMARY KEY           |
-| name         | Text          | Nom du jeu.                                        | NOT NULL             |
+| name         | Text          | Nom du jeu.                                        | NOT NULL UNIQUE            |
 | date         | Integer       | Date de sortie du jeu (année).                     | NOT NULL             |
 | platform     | Text          | Plateforme du jeu.                                 | NOT NULL               |
 | picture      | Text          | URL de l'image associée au jeu.                   |       |
@@ -149,7 +149,7 @@ En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour m
 | id           | Integer (PK)  | Identifiant unique du challenge.                   |SERIAL PRIMARY KEY          |
 | user_id      | Integer (FK)  | Référence vers l'identifiant du créateur.          | Doit exister dans `user` |
 | game_id      | Integer (FK)  | Référence vers l'identifiant du jeu.               | Doit exister dans `game` |
-| name         | Text          | Nom du challenge.                                  | NOT NULL              |
+| name         | Text          | Nom du challenge.                                  | NOT NULL UNIQUE             |
 | description  | Text          | Description du challenge.                         |        |
 | start_at     | Timestamp     | Date et heure de début du challenge.              | NOT NULL              |
 | end_at       | Timestamp     | Date et heure de fin du challenge.                | NOT NULL              |

@@ -115,7 +115,7 @@ En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour m
 | **Attribut** | **Type**      | **Description**                    | **Contraintes**        |
 |--------------|---------------|------------------------------------|------------------------|
 | id           | Integer (PK)  | Identifiant unique du rôle.        | SERIAL PRIMARY KEY         |
-| name         | Text          | Nom du rôle.                       | NOT NULL UNIQUE       |
+| name         | Text          | Nom du rôle.                       | NOT NULL, UNIQUE       |
 
 ---
 

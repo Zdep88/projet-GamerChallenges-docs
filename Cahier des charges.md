@@ -107,3 +107,8 @@ En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour m
 - Scrum Master : Axel Poncet
 - Référent technique Git / Tech lead front : Lucas Pinte
 - Tech Lead back : Nicolas Conan
+
+# Dictionnaire de données
+
+Table role
+Champ   Type    Spécificités    Description

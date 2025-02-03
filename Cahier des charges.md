@@ -27,7 +27,7 @@ Soumission de participations : les utilisateurs peuvent envoyer leurs vidéos po
 
 Tableau des leaders : affichage des utilisateurs ayant réalisé le plus de défis et obtenu le plus de votes.
 
-Filtres de recherche : par jeux.
+Filtres de recherche de challenge par jeux.
 
 ## Propositions d’évolutions possibles
 
@@ -39,9 +39,27 @@ Système de récompenses : badges ou points pour les utilisateurs en fonction de
 
 # Liste des technologies utilisées
 
-- Front : Vite, React, TypeScript, Tailwind
-- Back : Node.js, express, postgreSQL
-- Déploiement : nginx, VPS (hébergeur)
+- Front :
+  
+- Vite est utilisé pour pouvoir construire de manière éfficace et optimiser les fichiers de la partie front-end envoyé au client (minification, diminution des requètes HTTP..)
+
+- React sera utilisé pour faciliter la manipulation du DOM ainsi que pour les mêmes raisons de performance qui nous à poussaient à utiliser Vite.
+  
+- TypeScript va nous permettre d'anticiper des bugs en forçant un typage fort et donc passer moins de temps a débuger ainsi pourra nous permettre d'avoir une meilleure maintenabilité.
+  
+- Tailwind CSS permet de concevoir rapidement des interfaces sur mesure grâce à ses classes utilitaires flexibles, tout en garantissant performance, maintenabilité et cohérence, contrairement aux frameworks imposant des styles prédéfinis.
+  
+- Back :
+  
+- Node.js permet de créer des applications rapides et évolutives grâce à son moteur JavaScript performant et sa gestion asynchrone des requêtes.
+  
+- Express simplifie le développement d'applications web avec Node.js grâce à sa structure minimaliste et ses outils flexibles pour gérer les routes et les middlewares.
+  
+- PostgreSQL on choisit un base de données SQL pour correspondre au typage fort de TypeScript côté Front et aux fortes contraintes de structure qu'on peut attendre d'une API REST.
+  
+- Déploiement :
+- Nginx est parfaitement compatible avec Node.js, ayant été conçu pour fonctionner de manière optimale avec des applications JavaScript, ce qui en fait un choix idéal pour notre projet.
+- VPS hébergeur IONOS qui va nous permettre de déployer l'application directement sur un serveur distant en se servant l'interfaces Linux.
 
 # Public ciblé
 
@@ -56,30 +74,58 @@ Des amateurs et/ou experts de jeux vidéos et de challenges plus ou moins décal
 
 ```
 index
+    /about
+    /profile
     /signup
     /login
     /games
-        /games/:gameId
+        /:gameId
             /:challengeId
 ```
 
 # Routes
 
 `/` Voir la page d'accueil
+
 `/signup` Accéder à la page pour s'inscrire
+
 `/login` Accéder à la page pour se connecter
+
 `/profile` Accéder à la page de profil
 
-`/games` Voir la page de la liste de tous les jeux
-`/games/:game` Voir la page d'un jeu spécifique
-`/games/:game/:challenge` Voir la page d'un challenge spécifique
+`/about` Accéder à la page à propos
 
+`/games` Voir la page de la liste de tous les jeux
+
+`/games/:gameId` Voir la page d'un jeu spécifique
+
+`/games/:gameId/:challengeId` Voir la page d'un challenge spécifique
 
 ## Back
 
-`/api/games`
-`/api/games/:game`
-`/api/games/:game/:challenge`
+**GET**
+
+`/api/games` \
+`/api/games/:gameId` \
+`/api/challenges/:challengeId` \
+`/api/users/:userId` (Elle doit absolument joindre toutes les propositions de l'utilisateur)
+
+**POST**
+
+`/api/users` \
+`/api/challenges/`\
+`/api/challenges/:challengeId` (C'est une route pour créer une proposition et non un challenge)
+
+**UPDATE**
+
+`/api/challenges/:challengeId`\
+`/api/propositions/:propositionId`\
+`/api/users/:userId`
+
+**DELETE**
+
+`/api/challenges/:challengeId` \
+`/api/users/:userId`
 
 # User stories
 
@@ -90,9 +136,8 @@ En tant que visiteur, je veux accéder à la page login afin de me connecter à 
 
 En tant que visiteur, je veux accéder à la page games afin de voir la liste des jeux.
 En tant que visiteur, je veux accéder à la page d'un jeu spécifique afin de voir la liste des challenges de ce jeu (en cours, populaires, tous).
-En tant que visiteur, je veux accéder à la page d'un challenges spécifique afin de voir la liste des propositions des joueurs.
+En tant que visiteur, je veux accéder à la page d'un challenge spécifique afin de voir la liste des vidéos soumises par les joueurs en tant que propositions.
 
-En tant qu' utilisateur, je veux pouvoir faire les mêmes choses qu'un visiteur.
 En tant qu'utilisateur, je veux pouvoir me déconnecter.
 En tant qu'utilisateur je veux popuvoir accéder à la page profil pour modifier mot de passe, modifier le pseudonyme.
 

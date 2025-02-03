@@ -114,8 +114,8 @@ En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour m
 
 | **Attribut** | **Type**      | **Description**                    | **Contraintes**        |
 |--------------|---------------|------------------------------------|------------------------|
-| id           | Integer (PK)  | Identifiant unique du rôle.        | Auto-généré            |
-| name         | Text          | Nom du rôle.                       | Non nul, unique        |
+| id           | Integer (PK)  | Identifiant unique du rôle.        | SERIAL PRIMARY KEY         |
+| name         | Text          | Nom du rôle.                       | NOT NULL UNIQUE       |
 
 ---
 
@@ -123,10 +123,10 @@ En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour m
 
 | **Attribut** | **Type**      | **Description**                                      | **Contraintes**        |
 |--------------|---------------|----------------------------------------------------|------------------------|
-| id           | Integer (PK)  | Identifiant unique de l'utilisateur.               | Auto-généré            |
+| id           | Integer (PK)  | Identifiant unique de l'utilisateur.               | SERIAL PRIMARY KEY      |
 | role_id      | Integer (FK)  | Référence vers l'identifiant du rôle.               | Doit exister dans `role` |
-| name         | Text          | Nom de l'utilisateur.                              | Non nul                |
-| password     | Text          | Mot de passe de l'utilisateur.                     | Non nul                |
+| name         | Text          | Nom de l'utilisateur.                              | NOT NULL              |
+| password     | Text          | Mot de passe de l'utilisateur.                     | NOT NULL            |
 
 ---
 
@@ -134,11 +134,11 @@ En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour m
 
 | **Attribut** | **Type**      | **Description**                                      | **Contraintes**        |
 |--------------|---------------|----------------------------------------------------|------------------------|
-| id           | Integer (PK)  | Identifiant unique du jeu.                         | Auto-généré            |
-| name         | Text          | Nom du jeu.                                        | Non nul                |
-| date         | Integer       | Date de sortie du jeu (année).                     | Non nul                |
-| platform     | Text          | Plateforme du jeu.                                 | Non nul                |
-| picture      | Text          | URL de l'image associée au jeu.                   | Peut être nul          |
+| id           | Integer (PK)  | Identifiant unique du jeu.                         | SERIAL PRIMARY KEY           |
+| name         | Text          | Nom du jeu.                                        | NOT NULL             |
+| date         | Integer       | Date de sortie du jeu (année).                     | NOT NULL             |
+| platform     | Text          | Plateforme du jeu.                                 | NOT NULL               |
+| picture      | Text          | URL de l'image associée au jeu.                   |       |
 
 ---
 
@@ -146,14 +146,14 @@ En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour m
 
 | **Attribut** | **Type**      | **Description**                                      | **Contraintes**        |
 |--------------|---------------|----------------------------------------------------|------------------------|
-| id           | Integer (PK)  | Identifiant unique du challenge.                   | Auto-généré            |
+| id           | Integer (PK)  | Identifiant unique du challenge.                   |SERIAL PRIMARY KEY          |
 | user_id      | Integer (FK)  | Référence vers l'identifiant du créateur.          | Doit exister dans `user` |
 | game_id      | Integer (FK)  | Référence vers l'identifiant du jeu.               | Doit exister dans `game` |
-| name         | Text          | Nom du challenge.                                  | Non nul                |
-| description  | Text          | Description du challenge.                         | Peut être nul          |
-| start_at     | Timestamp     | Date et heure de début du challenge.              | Non nul                |
-| end_at       | Timestamp     | Date et heure de fin du challenge.                | Non nul                |
-| url_video    | Text          | URL de la vidéo associée au challenge.            | Peut être nul          |
+| name         | Text          | Nom du challenge.                                  | NOT NULL              |
+| description  | Text          | Description du challenge.                         |        |
+| start_at     | Timestamp     | Date et heure de début du challenge.              | NOT NULL              |
+| end_at       | Timestamp     | Date et heure de fin du challenge.                | NOT NULL              |
+| url_video    | Text          | URL de la vidéo associée au challenge.            |        |
 
 ---
 
@@ -161,12 +161,12 @@ En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour m
 
 | **Attribut** | **Type**      | **Description**                                      | **Contraintes**        |
 |--------------|---------------|----------------------------------------------------|------------------------|
-| id           | Integer (PK)  | Identifiant unique de la proposition.              | Auto-généré            |
+| id           | Integer (PK)  | Identifiant unique de la proposition.              | SERIAL PRIMARY KEY          |
 | challenge_id | Integer (FK)  | Référence vers l'identifiant du challenge.          | Doit exister dans `challenge` |
 | user_id      | Integer (FK)  | Référence vers l'identifiant de l'utilisateur.      | Doit exister dans `user` |
-| title        | Text          | Titre de la proposition.                           | Non nul                |
-| description  | Text          | Description de la proposition.                     | Peut être nul          |
-| url_video    | Text          | URL de la vidéo associée à la proposition.         | Peut être nul          |
+| title        | Text          | Titre de la proposition.                           | NOT NULL              |
+| description  | Text          | Description de la proposition.                     |          |
+| url_video    | Text          | URL de la vidéo associée à la proposition.         |         |
 
 ---
 
@@ -174,10 +174,10 @@ En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour m
 
 | **Attribut** | **Type**      | **Description**                                      | **Contraintes**        |
 |--------------|---------------|----------------------------------------------------|------------------------|
-| id           | Integer (PK)  | Identifiant unique du vote sur un challenge.        | Auto-généré            |
+| id           | Integer (PK)  | Identifiant unique du vote sur un challenge.        | SERIAL PRIMARY KEY          |
 | challenge_id | Integer (FK)  | Référence vers l'identifiant du challenge voté.      | Doit exister dans `challenge` |
 | user_id      | Integer (FK)  | Référence vers l'identifiant de l'utilisateur votant.| Doit exister dans `user` |
-| value        | Boolean       | Valeur du vote (par exemple, positif ou négatif).    | Non nul                |
+| value        | Boolean       | Valeur du vote (par exemple, positif ou négatif).    | NOT NULL               |
 
 ---
 
@@ -185,7 +185,7 @@ En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour m
 
 | **Attribut** | **Type**      | **Description**                                      | **Contraintes**        |
 |--------------|---------------|----------------------------------------------------|------------------------|
-| id           | Integer (PK)  | Identifiant unique du vote sur une proposition.     | Auto-généré            |
+| id           | Integer (PK)  | Identifiant unique du vote sur une proposition.     | SERIAL PRIMARY KEY           |
 | prop_id      | Integer (FK)  | Référence vers l'identifiant de la proposition votée.| Doit exister dans `proposition` |
 | user_id      | Integer (FK)  | Référence vers l'identifiant de l'utilisateur votant.| Doit exister dans `user` |
-| value        | Boolean       | Valeur du vote (par exemple, positif ou négatif).    | Non nul                |
+| value        | Boolean       | Valeur du vote (par exemple, positif ou négatif).    | NOT NULL              |

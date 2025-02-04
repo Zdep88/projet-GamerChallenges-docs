@@ -235,3 +235,6 @@ En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour m
 | prop_id      | Integer (FK)  | Référence vers l'identifiant de la proposition votée.| Doit exister dans `proposition` |
 | user_id      | Integer (FK)  | Référence vers l'identifiant de l'utilisateur votant.| Doit exister dans `user` |
 | value        | Boolean       | Valeur du vote (par exemple, positif ou négatif).    | NOT NULL              |
+
+## Maquettes
+[Lien vers les maquettes](https://www.figma.com/design/El2gmuO84Ogl4Ro5w9du4H/Maquette-gamerChallenges?node-id=0-1&p=f&t=8mmzxNxH1xVpjMaX-0)

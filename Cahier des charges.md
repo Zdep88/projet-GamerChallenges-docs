@@ -114,7 +114,7 @@ index
 
 `/api/users` \
 `/api/challenges/`\
-`/api/challenges/:challengeId` (C'est une route pour créer une proposition et non un challenge)
+`/api/challenges/:challengeId/proposition` (C'est une route pour créer une proposition et non un challenge)
 
 **UPDATE**
 
@@ -130,21 +130,34 @@ index
 
 # User stories
 
+## Visiteur
+
 En tant que visiteur, je veux accéder à la page d'accueil afin de voir les challenges en cours.
+
 En tant que visiteur, je veux accéder à la page d'accueil afin de voir les challenges populaires.
+
 En tant que visiteur, je veux accéder à la page signup afin de créer un compte.
+
 En tant que visiteur, je veux accéder à la page login afin de me connecter à mon compte.
 
 En tant que visiteur, je veux accéder à la page games afin de voir la liste des jeux.
+
 En tant que visiteur, je veux accéder à la page d'un jeu spécifique afin de voir la liste des challenges de ce jeu (en cours, populaires, tous).
+
 En tant que visiteur, je veux accéder à la page d'un challenge spécifique afin de voir la liste des vidéos soumises par les joueurs en tant que propositions.
 
+## Utilisateur
+
 En tant qu'utilisateur, je veux pouvoir me déconnecter.
-En tant qu'utilisateur je veux popuvoir accéder à la page profil pour modifier mot de passe, modifier le pseudonyme.
+
+En tant qu'utilisateur je veux pouvoir accéder à la page profil pour modifier mot de passe, modifier le pseudonyme.
 
 En tant qu'utilisateur, je veux accéder à la page d'un jeu spécifique, pour créer un challenge, modifier  ou supprimer mes challenges.
+
 En tant qu'utilisateur, je veux accéder à la page d'un challenge spécifique, pour faire une proposition, ou modifier la proposition que j'ai déjà faite, ou supprimer ma proposition.
+
 En tant qu'utilisateur, je veux pouvoir voter pour/contre un challenge spécifique pour modifier sa popularité.
+
 En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour modifier sa popularité.
 
 # Roles

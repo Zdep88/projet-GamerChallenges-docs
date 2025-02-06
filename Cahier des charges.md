@@ -25,11 +25,11 @@ Votations : possibilité de voter pour les défis proposés et les meilleures pa
 
 Soumission de participations : les utilisateurs peuvent envoyer leurs vidéos pour prouver la réalisation des challenges.
 
-Tableau des leaders : affichage des utilisateurs ayant réalisé le plus de défis et obtenu le plus de votes.
-
-Filtres de recherche de challenge par jeux.
+Barre de recherche pour un challenge ou un jeu.
 
 ## Propositions d’évolutions possibles
+
+Tableau des leaders : affichage des utilisateurs ayant réalisé le plus de défis et obtenu le plus de votes.
 
 Filtres de recherche : par type de challenge, et par popularité.
 
@@ -39,7 +39,7 @@ Système de récompenses : badges ou points pour les utilisateurs en fonction de
 
 # Liste des technologies utilisées
 
-- Front :
+## Front :
   
 - Vite est utilisé pour pouvoir construire de manière éfficace et optimiser les fichiers de la partie front-end envoyé au client (minification, diminution des requètes HTTP..)
 
@@ -47,9 +47,9 @@ Système de récompenses : badges ou points pour les utilisateurs en fonction de
   
 - TypeScript va nous permettre d'anticiper des bugs en forçant un typage fort et donc passer moins de temps a débuger ainsi pourra nous permettre d'avoir une meilleure maintenabilité.
   
-- Tailwind CSS permet de concevoir rapidement des interfaces sur mesure grâce à ses classes utilitaires flexibles, tout en garantissant performance, maintenabilité et cohérence, contrairement aux frameworks imposant des styles prédéfinis.
+- Vanilla css principalement.
   
-- Back :
+## Back :
   
 - Node.js permet de créer des applications rapides et évolutives grâce à son moteur JavaScript performant et sa gestion asynchrone des requêtes.
   
@@ -57,8 +57,10 @@ Système de récompenses : badges ou points pour les utilisateurs en fonction de
   
 - PostgreSQL on choisit un base de données SQL pour correspondre au typage fort de TypeScript côté Front et aux fortes contraintes de structure qu'on peut attendre d'une API REST.
   
-- Déploiement :
+## Déploiement :
+
 - Nginx est parfaitement compatible avec Node.js, ayant été conçu pour fonctionner de manière optimale avec des applications JavaScript, ce qui en fait un choix idéal pour notre projet.
+
 - VPS hébergeur IONOS qui va nous permettre de déployer l'application directement sur un serveur distant en se servant l'interfaces Linux.
 
 # Public ciblé
@@ -105,6 +107,7 @@ index
 
 **GET**
 
+`/api` <-- réponse de l'api pour confirmer la connexion
 `/api/games` \
 `/api/games/:gameId` \
 `/api/challenges/:challengeId` \

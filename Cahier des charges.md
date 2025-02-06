@@ -105,31 +105,34 @@ index
 
 ## Back
 
-**GET**
+### Root
 
-`/api` <-- réponse de l'api pour confirmer la connexion
-`/api/games` \
-`/api/games/:gameId` \
-`/api/challenges/:challengeId` \
-`/api/users/:userId` (Elle doit absolument joindre toutes les propositions de l'utilisateur)
+`GET /api` confirmation de la connexion API/BDD
 
-**POST**
+### Users
 
-`/api/users` \
-`/api/challenges/`\
-`/api/challenges/:challengeId/proposition` (C'est une route pour créer une proposition et non un challenge)
+`GET /api/users/:userId` (Elle doit absolument joindre toutes les propositions de l'utilisateur) \
+`POST /api/users` \
+`UPDATE /api/users/:userId` \
+`DELETE /api/users/:userId`
 
-**UPDATE**
+### Games
 
-`/api/challenges/:challengeId`\
-`/api/propositions/:propositionId`\
-`/api/users/:userId`
+`GET /api/games` \
+`GET /api/games/:gameId`
 
-**DELETE**
+### Challenges
 
-`/api/propositions/:propositionId`\
-`/api/challenges/:challengeId` \
-`/api/users/:userId`
+`GET /api/challenges/:challengeId` \
+`POST /api/challenges/`\
+`UPDATE /api/challenges/:challengeId`\
+`DELETE /api/challenges/:challengeId`
+
+### Propositions
+
+`POST /api/challenges/:challengeId/proposition` (C'est une route pour créer une proposition et non un challenge) \
+`UPDATE /api/propositions/:propositionId`\
+`DELETE /api/propositions/:propositionId`
 
 # User stories
 

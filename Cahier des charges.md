@@ -109,30 +109,39 @@ index
 
 `GET /api` confirmation de la connexion API/BDD
 
-### Users
-
-`GET /api/users/:userId` (Elle doit absolument joindre toutes les propositions de l'utilisateur) \
-`POST /api/users` \
-`UPDATE /api/users/:userId` \
-`DELETE /api/users/:userId`
-
 ### Games
 
 `GET /api/games` \
-`GET /api/games/:gameId`
+`GET /api/games/:id`
 
 ### Challenges
 
-`GET /api/challenges/:challengeId` \
+`GET /api/challenges` \
+`GET /api/challenges/:id` \
 `POST /api/challenges/`\
-`UPDATE /api/challenges/:challengeId`\
-`DELETE /api/challenges/:challengeId`
+`PATCH /api/challenges/:id`\
+`DELETE /api/challenges/:id`
 
 ### Propositions
 
-`POST /api/challenges/:challengeId/proposition` (C'est une route pour créer une proposition et non un challenge) \
-`UPDATE /api/propositions/:propositionId`\
-`DELETE /api/propositions/:propositionId`
+`GET /api/propositions` \
+`GET /api/propositions/:id` \
+`POST /api/propositions` \
+`PATCH /api/propositions/:id`\
+`DELETE /api/propositions/:id`
+
+### Players
+
+`GET /api/players/:id` \
+`POST /api/players` \
+`PATCH /api/players/:id` \
+`DELETE /api/players/:id` \
+`POST /api/login`
+
+### Votes
+
+`POST /api/votechallenge` \
+`POST /api/voteproposition` \
 
 # User stories
 

@@ -118,6 +118,7 @@ index
 
 `GET /api/challenges` \
 `GET /api/challenges/:id` \
+`GET /api/challenges/popular` \
 `POST /api/challenges/`\
 `PATCH /api/challenges/:id`\
 `DELETE /api/challenges/:id`

@@ -61,7 +61,7 @@ Système de récompenses : badges ou points pour les utilisateurs en fonction de
 
 - Nginx est parfaitement compatible avec Node.js, ayant été conçu pour fonctionner de manière optimale avec des applications JavaScript, ce qui en fait un choix idéal pour notre projet.
 
-- VPS hébergeur IONOS qui va nous permettre de déployer l'application directement sur un serveur distant en se servant l'interfaces Linux.
+- VPS hébergeur IONOS qui va nous permettre de déployer l'application directement sur un serveur distant en se servant de l'interface Linux.
 
 # Public ciblé
 

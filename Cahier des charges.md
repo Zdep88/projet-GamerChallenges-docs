@@ -13,7 +13,7 @@ Inspiré par l’esprit de la communauté speedrun, GamerChallenges permet aux j
 
 ## Besoins Fonctionnels - MVP
 
-Page d'accueil : présentation de GamerChallenges, des défis en cours et populaires.
+Page d'accueil : présentation de GamerChallenges, des défis populaires et des plus récents défis.
 
 Système d'inscription et de connexion : gestion des utilisateurs.
 
@@ -25,7 +25,7 @@ Votations : possibilité de voter pour les défis proposés et les meilleures pa
 
 Soumission de participations : les utilisateurs peuvent envoyer leurs vidéos pour prouver la réalisation des challenges.
 
-Barre de recherche pour un challenge ou un jeu.
+Barre de recherche pour un jeu.
 
 ## Propositions d’évolutions possibles
 
@@ -55,7 +55,9 @@ Système de récompenses : badges ou points pour les utilisateurs en fonction de
   
 - Express simplifie le développement d'applications web avec Node.js grâce à sa structure minimaliste et ses outils flexibles pour gérer les routes et les middlewares.
   
-- PostgreSQL on choisit un base de données SQL pour correspondre au typage fort de TypeScript côté Front et aux fortes contraintes de structure qu'on peut attendre d'une API REST.
+- PostgreSQL : on choisit un base de données SQL pour correspondre au typage fort de TypeScript côté Front et aux fortes contraintes de structure qu'on peut attendre d'une API REST.
+
+- Sequelize : on choisit sequelize pour sa gestion fortes des types, sa gestion des relations et la sécurité.
   
 ## Déploiement :
 
@@ -76,26 +78,35 @@ Des amateurs et/ou experts de jeux vidéos et de challenges plus ou moins décal
 
 ```
 index
-    /about
     /profile
-    /signup
     /login
+    /signup
+    /contact
+    /about
+    /legals
+    /error
+
+    /games
     /games
         /:gameId
-            /:challengeId
+
+    /challenges
+        /:challengeId
 ```
 
 # Routes
 
 `/` Voir la page d'accueil
 
-`/signup` Accéder à la page pour s'inscrire
+`/profile` Accéder à la page de profil
 
 `/login` Accéder à la page pour se connecter
 
-`/profile` Accéder à la page de profil
+`/signup` Accéder à la page pour s'inscrire
 
-`/about` Accéder à la page à propos
+`/contact` Accéder à la page qui permet d'envoyer un mail à l'équipe de développement
+
+`/about` Accéder à la page à propos de l'équipe
 
 `/games` Voir la page de la liste de tous les jeux
 
@@ -107,42 +118,62 @@ index
 
 ### Root
 
-`GET /api` confirmation de la connexion API/BDD
-
-### Games
-
-`GET /api/games` \
-`GET /api/games/:id`
-
-### Challenges
-
-`GET /api/challenges` \
-`GET /api/challenges/:id` \
-`GET /api/challenges/popular` \
-`POST /api/challenges/`\
-`PATCH /api/challenges/:id`\
-`DELETE /api/challenges/:id`
-
-### Propositions
-
-`GET /api/propositions` \
-`GET /api/propositions/:id` \
-`POST /api/propositions` \
-`PATCH /api/propositions/:id`\
-`DELETE /api/propositions/:id`
+`GET /api` obtenir une confirmation de connexion
 
 ### Players
 
-`GET /api/players/:id` \
-`POST /api/players` \
-`PATCH /api/players/:id` \
-`DELETE /api/players/:id` \
-`POST /api/login`
+`GET /api/players/:id` récupérer les infos d'un joueur
 
-### Votes
+`POST /api/players` ajouter un nouveau player en spécifiant :\
+{ name, email, password } dans le corps de requête
 
-`POST /api/votechallenge` \
-`POST /api/voteproposition` \
+`PATCH /api/players/:id` modifier un player en spécifiant :\
+{ name, email, password } dans le corps de requête
+
+`DELETE /api/players/:id` supprimer un player
+
+`POST /api/login` obtnir le token d'authenfication (jwt) \
+au format { id , iat, exp } identifiant du joueur, heure d'émission, heure d'expiration
+
+### Games
+
+`GET /api/games` récupérer la liste des jeux
+
+`GET /api/games/:id` récupérérer un jeu
+
+### Challenges
+
+`GET /api/challenges` récupérer la liste des challenges
+
+`GET /api/challenges/:id` récupéerer un challenge
+
+`GET /api/challenges/popular` récupérer les 5 challenges les plus populaires
+
+`POST /api/challenges/` ajouter un challenge en spécifiant :\
+{ game_id, name, description } dans le corps de requête
+
+`PATCH /api/challenges/:id` modifier un challenge en spécifiant :\
+{ name, description } dans le corps de requête
+
+`DELETE /api/challenges/:id` supprimer un challenge
+
+`PATCH /api/votechallenge` changer la valeur du vote d'un player pour un challenge en spécifiant { challenge_id } dans le corps de requête
+
+### Propositions
+
+`GET /api/propositions` récupérer la liste des propositions
+
+`GET /api/propositions/:id` récupérer une proposition
+
+`POST /api/propositions` ajouter une proposition en spécifiant :\
+{ challenge_id, title, description, url_video } dans le corps de requête
+
+`PATCH /api/propositions/:id` modifier une proposition en spécifiant :\
+{ title, description, url_video } dans le corps de requête
+
+`DELETE /api/propositions/:id` supprimer une proposition
+
+`PATCH /api/voteprop` changer la valeur du vote d'un player pour une proposition en spécifiant { proposition_id } dans le corps de requête
 
 # User stories
 
@@ -185,44 +216,33 @@ En tant qu'utilisateur, je veux pouvoir voter pour/contre une proposition pour m
 
 # Dictionnaire des données
 
-## Table : `role`
+## Table : `player`
 
-| **Attribut** | **Type**      | **Description**                    | **Contraintes**        |
-|--------------|---------------|------------------------------------|------------------------|
-| id           | Integer (PK)  | Identifiant unique du rôle.        | SERIAL PRIMARY KEY         |
-| name         | Text          | Nom du rôle.                       | NOT NULL, UNIQUE       |
-
----
-
-## Table : `user`
-
-| **Attribut** | **Type**      | **Description**                                      | **Contraintes**        |
-|--------------|---------------|----------------------------------------------------|------------------------|
-| id           | Integer (PK)  | Identifiant unique de l'utilisateur.               | SERIAL PRIMARY KEY      |
-| role_id      | Integer (FK)  | Référence vers l'identifiant du rôle.               | Doit exister dans `role` |
-| name         | Text          | Nom de l'utilisateur.                              | NOT NULL UNIQUE             |
-| password     | Text          | Mot de passe de l'utilisateur.                     | NOT NULL            |
-
+| **Attribut** | **Type** | **Description** | **Contraintes** |
+| -------------|----------|-----------------|-----------------|
+| id | Integer | Identifiant unique de l'utilisateur | PRIMARY KEY |
+| name | Text | Nom de l'utilisateur | NOT NULL UNIQUE |
+| email | Text | Email de l'utilisateur | NOT NULL UNIQUE |
+| password | Text | Mot de passe de l'utilisateur | NOT NULL |
 ---
 
 ## Table : `game`
 
-| **Attribut** | **Type**      | **Description**                                      | **Contraintes**        |
-|--------------|---------------|----------------------------------------------------|------------------------|
-| id           | Integer (PK)  | Identifiant unique du jeu.                         | SERIAL PRIMARY KEY           |
-| name         | Text          | Nom du jeu.                                        | NOT NULL UNIQUE            |
-| date         | Integer       | Date de sortie du jeu (année).                     | NOT NULL             |
-| platform     | Text          | Plateforme du jeu.                                 | NOT NULL               |
-| picture      | Text          | URL de l'image associée au jeu.                   |       |
-
+| **Attribut** | **Type** | **Description** | **Contraintes** |
+|--------------|----------|-----------------|-----------------|
+| id | Integer | Identifiant unique du jeu.                         | SERIAL PRIMARY KEY |
+| name | Text | Nom du jeu | NOT NULL UNIQUE |
+| date | Integer | Date de sortie du jeu (année) | NOT NULL |
+| platform | Text | Plateforme du jeu | NOT NULL |
+| picture | Text | URL de l'image associée au jeu. |       |
 ---
 
 ## Table : `challenge`
 
-| **Attribut** | **Type**      | **Description**                                      | **Contraintes**        |
-|--------------|---------------|----------------------------------------------------|------------------------|
-| id           | Integer (PK)  | Identifiant unique du challenge.                   |SERIAL PRIMARY KEY          |
-| user_id      | Integer (FK)  | Référence vers l'identifiant du créateur.          | Doit exister dans `user` |
+| **Attribut** | **Type** | **Description** | **Contraintes** |
+|--------------|----------|-----------------|-----------------|
+| id | Integer (PK) | Identifiant unique du challenge. |SERIAL PRIMARY KEY |
+| user_id | Integer (FK) | Référence vers l'identifiant du créateur. | Doit exister dans `user` |
 | game_id      | Integer (FK)  | Référence vers l'identifiant du jeu.               | Doit exister dans `game` |
 | name         | Text          | Nom du challenge.                                  | NOT NULL UNIQUE             |
 | description  | Text          | Description du challenge.                         |        |
